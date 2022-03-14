@@ -1,9 +1,12 @@
 package be.pxl.paj.domain;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -18,6 +21,8 @@ public class Project {
 	private LocalDate start;
 	@OneToMany(mappedBy = "project")
 	private List<Researcher> researchers = new ArrayList<>();
+	@Enumerated(value= EnumType.STRING)
+	private ProjectPhase projectPhase;
 
 	public Project() {
 	}
@@ -25,6 +30,7 @@ public class Project {
 	public Project(String name) {
 		this.name = name;
 		this.start = LocalDate.now();
+		this.projectPhase = ProjectPhase.INITIATING;
 	}
 
 	public Long getId() {
@@ -53,6 +59,14 @@ public class Project {
 
 	public List<Researcher> getResearchers() {
 		return researchers;
+	}
+
+	public ProjectPhase getProjectPhase() {
+		return projectPhase;
+	}
+
+	public void setProjectPhase(ProjectPhase projectPhase) {
+		this.projectPhase = projectPhase;
 	}
 
 	@Override

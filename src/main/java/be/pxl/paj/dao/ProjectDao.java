@@ -1,6 +1,7 @@
 package be.pxl.paj.dao;
 
 import be.pxl.paj.domain.Project;
+import be.pxl.paj.domain.ProjectPhase;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -8,6 +9,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import javax.persistence.NoResultException;
 import javax.persistence.TypedQuery;
+import java.util.List;
 import java.util.function.Consumer;
 
 public class ProjectDao {
@@ -41,6 +43,14 @@ public class ProjectDao {
 			return null;
 		}
 	}
+
+	public List<Project> findByPhaseAndMinNumberOfResearchers(ProjectPhase phase, int minNumberOfResearchers) {
+		TypedQuery<Project> query = entityManager.createNamedQuery("ProjectsByPhaseAndMinNumberOfResearchers", Project.class);
+		query.setParameter("phase", phase);
+		query.setParameter("numberOfResearchers", minNumberOfResearchers);
+		return query.getResultList();
+	}
+
 
 	private void executeInsideTransaction(Consumer<EntityManager> action) {
 		EntityTransaction tx = entityManager.getTransaction();

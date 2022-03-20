@@ -7,12 +7,14 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
+@NamedQuery(name = "ProjectsByPhaseAndMinNumberOfResearchers", query = "SELECT p FROM Project p WHERE p.projectPhase = :phase AND p.researchers.size >= :numberOfResearchers")
 public class Project {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

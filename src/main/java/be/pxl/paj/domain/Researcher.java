@@ -60,17 +60,12 @@ public class Researcher {
 		project.addResearcher(this);
 	}
 
-	public Project getProject() {
-		return project;
-	}
-
 	@Override
 	public String toString() {
 		return "Researcher{" +
 				"id=" + id +
 				", name='" + name + '\'' +
 				", contactInformation=" + contactInformation +
-				", project=" + project +
 				'}';
 	}
 }

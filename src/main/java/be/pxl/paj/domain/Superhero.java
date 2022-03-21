@@ -1,7 +1,5 @@
 package be.pxl.paj.domain;
 
-import be.pxl.annotations.Classified;
-import be.pxl.annotations.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -10,7 +8,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
-@Classified
 @Entity
 public class Superhero {
 
@@ -45,7 +42,6 @@ public class Superhero {
 		this.firstName = firstName;
 	}
 
-	@Classified(level = Level.TOP_SECRET)
 	public String getLastName() {
 		LOGGER.fatal("LastName of " + superheroName + " was revealed.");
 		return lastName;
